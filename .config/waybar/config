@@ -1,0 +1,117 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1920, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "battery",
+        "group/power"
+    ],
+    "hyprland/window": {
+        "format": "{title}",
+        "icon": true
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "|- {windows} -|",
+        "workspace-taskbar": {
+            "enable": true,
+            "icon-size": 20,
+        },
+    },
+    "clock": {
+        "timezone": "Europe/Prague",
+        "tooltip-format": "{calendar}",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% {icon}󱐋",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "on-click": "iwgtk",
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon} {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "default": ["", "", ""]
+        },
+        "reverse-scrolling": true,
+        // "on-click": "pamixer -t ; kill -s 12 $(pgrep waybar)",
+        "on-click": "pamixer -t",
+        "on-click-right": "pavucontrol",
+    },
+    "group/power": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 200,
+            "children-class": "power-drawer",
+        },
+        "modules": [
+            "custom/poweroff",
+            "custom/reboot",
+            "custom/logout",
+            "custom/sleep",
+        ]
+    },
+    "custom/poweroff": {
+        "format" : "⏻",
+        "tooltip": false,
+        "on-click": "systemctl poweroff",
+    },
+    "custom/reboot": {
+        "format" : "",
+        "tooltip": false,
+        "on-click": "systemctl reboot",
+    },
+    "custom/sleep": {
+        "format" : "󰒲",
+        "tooltip": false,
+        "on-click": "notify-send hybrid-sleep",
+    },
+    "custom/logout": {
+        "format" : "󰍃",
+        "tooltip": false,
+        "on-click": "notify-send logout",
+    },
+}

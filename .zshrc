@@ -193,3 +193,24 @@ alias ls="eza --icons=always"
 eval "$(zoxide init zsh)"
 
 alias cd="z"
+
+# CLI calculator
+
+function my-rewrite-accepted-line {
+  emulate -L zsh
+  setopt extended_glob
+  if [[ ${BUFFER// /} == [\(+\-]#([0-9]##(|.[0-9]#)(|e(-|+|)[0-9]##)|0x[0-9A-Fa-f]##)[-+*/%\&\|\^]* ]]; then
+    BUFFER="calc $BUFFER"
+  fi
+}
+function my-accept-line {
+    my-rewrite-accepted-line "$@"
+    zle accept-line "$@"
+}
+zle -N my-accept-line
+bindkey '^J' my-accept-line
+bindkey '^M' my-accept-line
+
+# Cargo installed binaries
+
+PATH="$PATH:/home/sayta/.cargo/bin"
