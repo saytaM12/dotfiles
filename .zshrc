@@ -214,3 +214,8 @@ bindkey '^M' my-accept-line
 # Cargo installed binaries
 
 PATH="$PATH:/home/sayta/.cargo/bin"
+
+# Java
+
+JAVA_HOME="/usr/lib/jvm/java-25-openjdk/"
+PATH="$PATH:$JAVA_HOME/bin"

@@ -55,12 +55,13 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-wifi": "{essid} {icon}",
+        "format-ethernet": "{ipaddr} ",
+        "tooltip-format": "{ipaddr} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "on-click": "iwgtk",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -90,7 +91,6 @@
         "modules": [
             "custom/poweroff",
             "custom/reboot",
-            "custom/logout",
             "custom/sleep",
         ]
     },
@@ -107,11 +107,6 @@
     "custom/sleep": {
         "format" : "󰒲",
         "tooltip": false,
-        "on-click": "notify-send hybrid-sleep",
-    },
-    "custom/logout": {
-        "format" : "󰍃",
-        "tooltip": false,
-        "on-click": "notify-send logout",
+        "on-click": "systemctl sleep",
     },
 }
