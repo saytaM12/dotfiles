@@ -219,3 +219,7 @@ PATH="$PATH:/home/sayta/.cargo/bin"
 
 JAVA_HOME="/usr/lib/jvm/java-25-openjdk/"
 PATH="$PATH:$JAVA_HOME/bin"
+
+# Copilot
+
+PATH="$PATH:$HOME/dotfiles/.local/bin/"
